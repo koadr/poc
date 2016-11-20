@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  postgres:
+    image: postgres:9.5.3
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  elasticsearch:
+      image: elasticsearch:latest
+      restart: always
+      environment:
+        CLUSTER: elasticsearch
+        NODE_NAME: node01
+      ports:
+        - "9200:9200"
+        - "9300:9300"

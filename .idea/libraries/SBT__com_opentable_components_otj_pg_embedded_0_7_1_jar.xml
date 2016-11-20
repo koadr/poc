@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="SBT: com.opentable.components:otj-pg-embedded:0.7.1:jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/com.opentable.components/otj-pg-embedded/jars/otj-pg-embedded-0.7.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/com.opentable.components/otj-pg-embedded/srcs/otj-pg-embedded-0.7.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

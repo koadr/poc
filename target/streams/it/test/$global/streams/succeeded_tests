@@ -1,0 +1,6 @@
+#Successful Tests
+#Sun Nov 20 17:47:21 EST 2016
+com.trovimap.infrastructure.slick.SlickPropertyRepositorySpec=1479682026697
+com.trovimap.infrastructure.http.rest.PropertyServiceSpec=1479682041580
+com.trovimap.infrastructure.elasticsearch.PropertyQueryServiceSpec=1479682015945
+com.trovimap.infrastructure.http.rest.PingServiceSpec=1479682016412

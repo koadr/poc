@@ -1,0 +1,8 @@
+[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
+[0m[[0mdebug[0m] [0m	(/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/src/main/resources/application.conf,/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/target/scala-2.11/classes/application.conf)[0m
+[0m[[0mdebug[0m] [0m	(/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/src/main/resources/db,/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/target/scala-2.11/classes/db)[0m
+[0m[[0mdebug[0m] [0m	(/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/src/main/resources/elasticsearch.conf,/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/target/scala-2.11/classes/elasticsearch.conf)[0m
+[0m[[0mdebug[0m] [0m	(/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/src/main/resources/environment.conf,/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/target/scala-2.11/classes/environment.conf)[0m
+[0m[[0mdebug[0m] [0m	(/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/src/main/resources/slick.conf,/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/target/scala-2.11/classes/slick.conf)[0m
+[0m[[0mdebug[0m] [0m	(/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/src/main/resources/db/migration,/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/target/scala-2.11/classes/db/migration)[0m
+[0m[[0mdebug[0m] [0m	(/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/src/main/resources/db/migration/V1__Create_Property_Table.sql,/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/target/scala-2.11/classes/db/migration/V1__Create_Property_Table.sql)[0m
