@@ -4,6 +4,7 @@ import java.util.Currency
 
 import org.scalatest._
 
+@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
 class PropertySpec extends WordSpec with MustMatchers {
 
   "Property" should {
@@ -15,9 +16,7 @@ class PropertySpec extends WordSpec with MustMatchers {
       val discountedPrice = Price(15000, Currency.getInstance("USD"))
       val property = arbProperty
 
-      val priceEquals = property
-          .associatePrice(discountedPrice)
-          .price mustBe discountedPrice
+      property.associatePrice(discountedPrice).price mustBe discountedPrice
     }
   }
 }

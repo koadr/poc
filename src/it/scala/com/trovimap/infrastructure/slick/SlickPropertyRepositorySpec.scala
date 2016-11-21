@@ -5,6 +5,7 @@ import com.trovimap.infrastructure.TestTrovimap
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{Assertion, MustMatchers, WordSpec}
 
+@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
 class SlickPropertyRepositorySpec
     extends WordSpec
     with MustMatchers
@@ -20,7 +21,7 @@ class SlickPropertyRepositorySpec
       val attemptCreate = propertyRepo.createProperty(property)
       val attemptGet = propertyRepo.getPropertyById(property.id)
 
-      val _: Assertion = whenReady(attemptGet) { retrievedProperty =>
+      whenReady(attemptGet) { retrievedProperty =>
         retrievedProperty mustBe Some(property)
       }
     }
@@ -29,7 +30,7 @@ class SlickPropertyRepositorySpec
       val property = arbProperty
       val attemptGet = propertyRepo.getPropertyById(property.id)
 
-      val propertyEq = whenReady(attemptGet) { retrievedProperty =>
+      whenReady(attemptGet) { retrievedProperty =>
         retrievedProperty mustBe None
       }
     }
@@ -41,7 +42,7 @@ class SlickPropertyRepositorySpec
       val property = arbProperty
       val attemptCreate = propertyRepo.createProperty(property)
 
-      val _: Assertion = whenReady(attemptCreate) { createdProperty =>
+      whenReady(attemptCreate) { createdProperty =>
         createdProperty mustBe Some(property)
       }
     }
@@ -56,7 +57,7 @@ class SlickPropertyRepositorySpec
       val adjustedProperty = property.associatePrice(adjustedPrice)
       val attempUpdate = propertyRepo.updateProperty(adjustedProperty)
 
-      val propertyEq = whenReady(attempUpdate) { updatedProperty =>
+      whenReady(attempUpdate) { updatedProperty =>
         updatedProperty mustBe Some(adjustedProperty)
       }
     }

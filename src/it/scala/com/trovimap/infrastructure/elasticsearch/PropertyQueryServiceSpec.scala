@@ -6,7 +6,7 @@ import com.trovimap.domain.{Property, TestHelpers}
 import com.trovimap.infrastructure.TestTrovimap
 import org.scalatest.{MustMatchers, WordSpecLike}
 
-@SuppressWarnings(Array("org.wartremover.warts.Any"))
+@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
 class PropertyQueryServiceSpec
     extends ElasticSearchSpec
     with WordSpecLike
@@ -27,14 +27,13 @@ class PropertyQueryServiceSpec
   }
 
   "PropertyQueryService" should {
-    "query based on a single attribute" in new TestTrovimap
-    with TestHelpers {
+    "query based on a single attribute" in new TestTrovimap with TestHelpers {
       val propertya =
         propertyData(arbProperty.copy(numberOfBathrooms = 3)).copy(id = "a")
       val propertyb =
         propertyData(arbProperty.copy(numberOfBathrooms = 3)).copy(id = "b")
 
-      val res = client execute {
+      client execute {
         bulk(
           indexInto(indexAndType).source(propertya).id(propertya.id),
           indexInto(indexAndType).source(propertyb).id(propertyb.id)
@@ -45,12 +44,11 @@ class PropertyQueryServiceSpec
         .searchByAttributes(Map("numberOfBathrooms" -> 3))
         .futureValue
         .sortBy(_.id)
-      val propertyAEquals = propa must be(propertya)
-      val propertyBEquals = propb must be(propertyb)
+      propa must be(propertya)
+      propb must be(propertyb)
     }
 
-    "query based on multiple attributes" in new TestTrovimap
-    with TestHelpers {
+    "query based on multiple attributes" in new TestTrovimap with TestHelpers {
       val propertya = propertyData(
         arbProperty.copy(numberOfBathrooms = 3, numberOfBedrooms = 5))
         .copy(id = "a")
@@ -58,7 +56,7 @@ class PropertyQueryServiceSpec
         arbProperty.copy(numberOfBathrooms = 3, numberOfBedrooms = 6))
         .copy(id = "b")
 
-      val res = client execute {
+      client execute {
         bulk(
           indexInto(indexAndType).source(propertya).id(propertya.id),
           indexInto(indexAndType).source(propertyb).id(propertyb.id)
@@ -69,7 +67,7 @@ class PropertyQueryServiceSpec
         .searchByAttributes(
           Map("numberOfBathrooms" -> 3, "numberOfBedrooms" -> 6))
         .futureValue
-      val propertyBEquals = propb must be(propertyb)
+      propb must be(propertyb)
     }
   }
 

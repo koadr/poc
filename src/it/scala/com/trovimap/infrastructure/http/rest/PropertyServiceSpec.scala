@@ -14,6 +14,7 @@ import com.trovimap.infrastructure.http.dto.PropertyDTO
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{MustMatchers, WordSpecLike}
 
+@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
 class PropertyServiceSpec
     extends ElasticSearchSpec
     with WordSpecLike
@@ -29,7 +30,7 @@ class PropertyServiceSpec
     "respond with a 404 if property does not exist" in new TestTrovimap {
       dbHandle {
         Get("/properties/test") ~> routes ~> check {
-          val statusEq = status mustBe StatusCodes.NotFound
+          status mustBe StatusCodes.NotFound
         }
       }
     }
@@ -40,9 +41,9 @@ class PropertyServiceSpec
         val property = arbProperty
         val createProp = propertyRepo.createProperty(property).futureValue
         Get(s"/properties/${property.id.id}") ~> routes ~> check {
-          val statusEq = status mustBe StatusCodes.OK
-          val contentTypeEq = contentType mustBe `application/json`
-          val responseEq = responseAs[PropertyDTO] mustBe dto(property)
+          status mustBe StatusCodes.OK
+          contentType mustBe `application/json`
+          responseAs[PropertyDTO] mustBe dto(property)
         }
       }
     }

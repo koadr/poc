@@ -1,6 +1,0 @@
-[0m[[0minfo[0m] [0m[32mPropertyServiceSpec:[0m[0m
-[0m[[0minfo[0m] [0m[32mPropertyService[0m[0m
-[0m[[0minfo[0m] [0m[32m- should respond with a 404 if property does not exist[0m[0m
-[0m[[0minfo[0m] [0m[32m- should respond to single property query if exists[0m[0m
-[0m[[0minfo[0m] [0m[32m- should successfully creates a property[0m[0m
-[0m[[0minfo[0m] [0m[32m- should provide ability to search properties[0m[0m

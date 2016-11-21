@@ -17,6 +17,7 @@ import com.sksamuel.elastic4s.testkit.ElasticSugar
 
 import scala.concurrent.ExecutionContext
 
+@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
 trait TestTrovimap extends ElasticSugar {
   val port =
     ConfigFactory.load("application.it.conf").getInt("services.postgres.port")
@@ -50,7 +51,7 @@ trait TestTrovimap extends ElasticSugar {
   private def doSchemaMigration(datasource: DataSource): Unit = {
     val flyway = new Flyway
     flyway.setDataSource(datasource)
-    val _ = flyway.migrate()
+    flyway.migrate()
   }
 
 }

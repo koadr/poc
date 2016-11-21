@@ -7,6 +7,7 @@ import org.scalatest.{BeforeAndAfterAll, Suite}
 
 import scala.concurrent.duration._
 
+@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
 trait ElasticSearchSpec extends ElasticSugar with Suite with BeforeAndAfterAll with ScalaFutures {
   private implicit val patienceTimeout = org.scalatest.concurrent.PatienceConfiguration.Timeout(10.seconds)
 
@@ -20,7 +21,7 @@ trait ElasticSearchSpec extends ElasticSugar with Suite with BeforeAndAfterAll w
   }
 
   protected def dropAllIndexes(): Unit = {
-    val _ = client.execute {
+    client.execute {
       delete index "_all"
     }.await()
   }

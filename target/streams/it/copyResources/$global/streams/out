@@ -1,5 +1,0 @@
-[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/src/it/resources/application.it.conf,/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/target/scala-2.11/it-classes/application.it.conf)[0m
-[0m[[0mdebug[0m] [0m	(/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/src/it/resources/elasticsearch.it.conf,/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/target/scala-2.11/it-classes/elasticsearch.it.conf)[0m
-[0m[[0mdebug[0m] [0m	(/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/src/it/resources/environment.it.conf,/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/target/scala-2.11/it-classes/environment.it.conf)[0m
-[0m[[0mdebug[0m] [0m	(/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/src/it/resources/slick.it.conf,/Users/craigpottinger/Dropbox/Documents/Trovimap/Trovimap-poc/target/scala-2.11/it-classes/slick.it.conf)[0m
