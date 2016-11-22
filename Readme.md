@@ -15,9 +15,24 @@ After adjusting the configuration as outlined above, run the following command t
 sbt "run-main com.trovimap.infrastructure.elasticsearch.Bootstrap"
 ```
 
+### Running Postgres Migrations
+Before running the application, you will need to run all the requisite migrations. I am using [Flyway](https://flywaydb.org)
+```bash
+# Pass in the correct values for the POSTGRES_DATABASE_NAME, flyway.url, flyway.user, flyway.password first
+sbt -DPOSTGRES_DATABASE_NAME=postgres -Dflyway.url="jdbc:postgresql://localhost:5432/postgres" -Dflyway.user=postgres -Dflyway.password=postgres flywayMigrate
+```
+
 ### Running the Trovimap POC Application
 ```bash
 sbt "run-main com.trovimap.infrastructure.http.Trovimap"
+```
+
+### Running the Trovimap POC Application in a Dev/Prod Setting
+```bash
+sbt assembly
+# The above command will produce a jar in the target/scala-2.11/ folder (For example trovimap-poc-assembly-1.0.jar)
+# Run the java executable and you are good to go
+java -cp trovimap-poc-assembly-1.0.jar com.trovimap.infrastructure.http.Trovimap
 ```
 
 ### Rest API
