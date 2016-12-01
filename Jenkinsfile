@@ -9,9 +9,8 @@ stage('Checkout') {
 
 stage("Build") {
     node {
-        def sbtHome = tool 'sbt'
         withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
-            sh "${sbtHome} 'clean compile'"
+            sh "sbt 'clean compile'"
         }
     }
 }
@@ -19,16 +18,14 @@ stage("Build") {
 stage('Testing') {
     parallel unitTesting: {
         node {
-            def sbtHome = tool 'sbt'
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
-                sh "${sbtHome} test"
+                sh "sbt test"
             }
         }
     }, integrationTesting: {
         node {
-            def sbtHome = tool 'sbt'
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
-                sh "${sbtHome} 'it-test'"
+                sh "sbt 'it-test'"
             }
         }
     },
