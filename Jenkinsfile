@@ -1,19 +1,27 @@
 #!groovy
 
 stage('Checkout') {
-    // some block
-    checkout scm
+    node {
+        // some block
+        checkout scm
+    }
 }
 
 stage("Build") {
-    sh "sbt 'clean compile'"
+    node {
+        sh "sbt 'clean compile'"
+    }
 }
 
 stage('Testing') {
     parallel unitTesting: {
-        sh "sbt test"
+        node {
+            sh "sbt test"
+        }
     }, integrationTesting: {
-        sh "sbt 'it-test'"
+        node {
+            sh "sbt 'it-test'"
+        }
     },
     failFast: true
 }
