@@ -26,7 +26,7 @@ stage('Testing') {
         node {
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
                 sh """
-                    sbt "it:test"
+                    sbt it:test
                 """
             }
         }
