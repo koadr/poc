@@ -12,6 +12,7 @@ lazy val trovimapPOC = (project in file(".")).
     buildInfoPackage := "com.trovimap"
   ).
   settings(parallelExecution in IntegrationTest := false).
+  settings(addCommandAlias("itTest", "it:test")).
   settings( Defaults.itSettings : _*).
   settings(libraryDependencies ++= {
     val akkaHttpV   = "3.0.0-RC1"

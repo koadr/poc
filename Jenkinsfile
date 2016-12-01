@@ -22,6 +22,13 @@ stage('Testing') {
                 sh "sbt test"
             }
         }
+    }, integrationTesting: {
+        node {
+            withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
+                sh 'sbt itTest'
+
+            }
+        }
     },
     failFast: true
 }
