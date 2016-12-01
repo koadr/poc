@@ -9,18 +9,21 @@ stage('Checkout') {
 
 stage("Build") {
     node {
-        sh "sbt 'clean compile'"
+        def sbtHome = tool 'sbt'
+        sh "${sbtHome} 'clean compile'"
     }
 }
 
 stage('Testing') {
     parallel unitTesting: {
         node {
-            sh "sbt test"
+            def sbtHome = tool 'sbt'
+            sh "${sbtHome} test"
         }
     }, integrationTesting: {
         node {
-            sh "sbt 'it-test'"
+            def sbtHome = tool 'sbt'
+            sh "${sbtHome} 'it-test'"
         }
     },
     failFast: true
