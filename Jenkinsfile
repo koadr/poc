@@ -23,7 +23,6 @@ stage('Testing') {
             unstash "poc"
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
                 sh "sbt test"
-                step([$class: 'CheckStylePublisher', canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/checkstyle-result.xml.', unHealthy: ''])
             }
         }
     }, integrationTesting: {
@@ -38,7 +37,7 @@ stage('Testing') {
             unstash "poc"
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
                 sh "sbt scalastyle"
-                step([$class: 'CheckStylePublisher', canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/scalastyle-result.xml.', unHealthy: ''])
+                step([$class: 'CheckStylePublisher', canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'target/scalastyle-result.xml', unHealthy: ''])
             }
         }
     }
