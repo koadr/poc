@@ -4,7 +4,6 @@ import java.util.Currency
 
 import org.scalatest._
 
-@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
 class PropertySpec extends WordSpec with MustMatchers {
 
   "Property" should {

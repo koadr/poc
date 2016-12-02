@@ -7,7 +7,6 @@ import org.scalatest.{BeforeAndAfterAll, Suite}
 
 import scala.concurrent.duration._
 
-@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
 trait ElasticSearchSpec extends ElasticSugar with Suite with BeforeAndAfterAll with ScalaFutures {
   private implicit val patienceTimeout = org.scalatest.concurrent.PatienceConfiguration.Timeout(10.seconds)
 

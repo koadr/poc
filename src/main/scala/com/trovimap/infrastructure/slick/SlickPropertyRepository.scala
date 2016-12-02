@@ -23,14 +23,13 @@ class SlickPropertyRepository(db: slick.jdbc.JdbcBackend.Database)(
 
   /**
     * Serves as another example of access patterns in which the underlying item may not exist. This
-    * pattern is usually discouraged as throw "implies partialitiy". In fact, the static analysis tool - WartRemover -
-    * will not compile without the @SuppressWarnings below.
+    * pattern is usually discouraged as throw "implies partialitiy".
     *
     * @param id the id of the property
     * @throws PropertyNotFoundException if the property doesn't not exist
     * @return the specified property
     */
-  @SuppressWarnings(Array("org.wartremover.warts.Throw"))
+
   @throws[PropertyNotFoundException]
   private def _getPropertyByIdException(
       id: PropertyId): Future[domain.Property] = {
@@ -68,7 +67,6 @@ class SlickPropertyRepository(db: slick.jdbc.JdbcBackend.Database)(
     * @param id
     * @return the specified property created
     */
-  @SuppressWarnings(Array("org.wartremover.warts.Throw"))
   @throws[PropertyNotFoundException]
   private def _runningMultipleInTransaction(id: PropertyId) = {
     val result = (for {

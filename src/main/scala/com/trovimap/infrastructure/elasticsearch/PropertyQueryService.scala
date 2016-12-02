@@ -18,7 +18,7 @@ class PropertyQueryService(client: ElasticClient, indexAndType: IndexAndType)(
     extends api.PropertyQueryService {
   import com.sksamuel.elastic4s.jackson.ElasticJackson.Implicits._
 
-  @SuppressWarnings(Array("org.wartremover.warts.Any"))
+
   override def searchByAttributes(
       attributes: Attributes): Future[Seq[PropertyData]] = {
     client execute {

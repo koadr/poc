@@ -6,7 +6,7 @@ import com.trovimap.domain.{Property, TestHelpers}
 import com.trovimap.infrastructure.TestTrovimap
 import org.scalatest.{MustMatchers, WordSpecLike}
 
-@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
+
 class PropertyQueryServiceSpec
     extends ElasticSearchSpec
     with WordSpecLike

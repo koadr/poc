@@ -14,7 +14,6 @@ import com.trovimap.infrastructure.http.dto.PropertyDTO
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{MustMatchers, WordSpecLike}
 
-@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
 class PropertyServiceSpec
     extends ElasticSearchSpec
     with WordSpecLike

@@ -27,7 +27,6 @@ class PropertyService(api: PropertyApi) {
     )
   }
 
-  @SuppressWarnings(Array("org.wartremover.warts.Any"))
   val routes: Route =
     pathPrefix("properties") {
       get {

@@ -6,7 +6,6 @@ import akka.http.scaladsl.testkit.ScalatestRouteTest
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{MustMatchers, WordSpec}
 
-@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
 class PingServiceSpec
     extends WordSpec
     with MustMatchers

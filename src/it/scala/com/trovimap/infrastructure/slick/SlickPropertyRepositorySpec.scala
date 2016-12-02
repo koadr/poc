@@ -5,7 +5,6 @@ import com.trovimap.infrastructure.TestTrovimap
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{Assertion, MustMatchers, WordSpec}
 
-@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
 class SlickPropertyRepositorySpec
     extends WordSpec
     with MustMatchers

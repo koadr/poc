@@ -17,7 +17,6 @@ import com.sksamuel.elastic4s.testkit.ElasticSugar
 
 import scala.concurrent.ExecutionContext
 
-@SuppressWarnings(Array("org.wartremover.warts.NonUnitStatements"))
 trait TestTrovimap extends ElasticSugar {
   val port =
     ConfigFactory.load("application.it.conf").getInt("services.postgres.port")
