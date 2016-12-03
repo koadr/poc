@@ -40,6 +40,7 @@ lazy val trovimapPOC = (project in file(".")).
       "com.opentable.components" % "otj-pg-embedded" % "0.7.1" % "it,test"
     )
   }).settings(ScalastylePlugin.projectSettings).
+  settings(coverageEnabled := true).
   settings(
     name := "trovimap-poc",
     version := "1.0",
