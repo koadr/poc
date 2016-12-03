@@ -16,21 +16,25 @@ class SlickPropertyRepositorySpec
 
   "getProperty()" should {
     "fetch property that exists" in new TestTrovimap with TestHelpers {
-      val property = arbProperty
-      val attemptCreate = propertyRepo.createProperty(property)
-      val attemptGet = propertyRepo.getPropertyById(property.id)
+      dbHandle{
+        val property = arbProperty
+        val attemptCreate = propertyRepo.createProperty(property)
+        val attemptGet = propertyRepo.getPropertyById(property.id)
 
-      whenReady(attemptGet) { retrievedProperty =>
-        retrievedProperty mustBe Some(property)
+        whenReady(attemptGet) { retrievedProperty =>
+          retrievedProperty mustBe Some(property)
+        }
       }
     }
 
     "not fetch property that does not exist" in new TestTrovimap with TestHelpers {
-      val property = arbProperty
-      val attemptGet = propertyRepo.getPropertyById(property.id)
+      dbHandle{
+        val property = arbProperty
+        val attemptGet = propertyRepo.getPropertyById(property.id)
 
-      whenReady(attemptGet) { retrievedProperty =>
-        retrievedProperty mustBe None
+        whenReady(attemptGet) { retrievedProperty =>
+          retrievedProperty mustBe None
+        }
       }
     }
 
@@ -38,11 +42,13 @@ class SlickPropertyRepositorySpec
 
   "createProperty()" should {
     "create new property correctly" in new TestTrovimap with TestHelpers {
-      val property = arbProperty
-      val attemptCreate = propertyRepo.createProperty(property)
+      dbHandle{
+        val property = arbProperty
+        val attemptCreate = propertyRepo.createProperty(property)
 
-      whenReady(attemptCreate) { createdProperty =>
-        createdProperty mustBe Some(property)
+        whenReady(attemptCreate) { createdProperty =>
+          createdProperty mustBe Some(property)
+        }
       }
     }
 
@@ -50,14 +56,16 @@ class SlickPropertyRepositorySpec
 
   "updateProperty()" should {
     "update new property correctly" in new TestTrovimap with TestHelpers {
-      val property = arbProperty
-      val attemptCreate = propertyRepo.createProperty(property)
-      val adjustedPrice = arbPrice
-      val adjustedProperty = property.associatePrice(adjustedPrice)
-      val attempUpdate = propertyRepo.updateProperty(adjustedProperty)
+      dbHandle{
+        val property = arbProperty
+        propertyRepo.createProperty(property).futureValue
+        val adjustedPrice = arbPrice
+        val adjustedProperty = property.associatePrice(adjustedPrice)
+        val attempUpdate = propertyRepo.updateProperty(adjustedProperty)
 
-      whenReady(attempUpdate) { updatedProperty =>
-        updatedProperty mustBe Some(adjustedProperty)
+        whenReady(attempUpdate) { updatedProperty =>
+          updatedProperty mustBe Some(adjustedProperty)
+        }
       }
     }
 
