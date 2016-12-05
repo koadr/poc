@@ -1,7 +1,7 @@
 #!groovy
 
 stage('Checkout') {
-    node("linux") {
+    node {
         // some block
         checkout scm
         stash "poc"
@@ -9,7 +9,7 @@ stage('Checkout') {
 }
 
 stage("Build") {
-    node("linux") {
+    node {
         unstash "poc"
         withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
             sh "sbt clean compile"
@@ -19,7 +19,7 @@ stage("Build") {
 
 stage('Testing') {
     parallel unitTesting: {
-        node("linux") {
+        node {
             unstash "poc"
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
                 sh "sbt test"
@@ -33,7 +33,7 @@ stage('Testing') {
             }
         }
     }, stylecheck: {
-        node("linux") {
+        node {
             unstash "poc"
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
                 sh "sbt scalastyle"
@@ -41,7 +41,7 @@ stage('Testing') {
             }
         }
     }, reports: {
-        node("linux") {
+        node {
             unstash "poc"
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
                 sh "sbt coverage test"
@@ -58,7 +58,7 @@ stage("Performance") {
 }
 
 stage("Deploy") {
-    node("docker") {
+    node {
         unstash "poc"
         withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
             sh "sbt docker"
