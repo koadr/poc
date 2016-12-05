@@ -22,7 +22,7 @@ stage("Deploy") {
         unstash "poc"
         withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
             // This step should not normally be used in your script. Consult the inline help for details.
-            withDockerRegistry([credentialsId: '248b3cd6-9575-4bf5-aefe-12188ab9d2ba', url: 'koadr-on.azurecr.io']) {
+            withDockerRegistry([credentialsId: '248b3cd6-9575-4bf5-aefe-12188ab9d2ba', url: 'https://koadr-on.azurecr.io']) {
                 sh "sbt docker"
                 dir('target/docker') {
                     // some block
