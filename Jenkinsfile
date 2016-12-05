@@ -40,16 +40,17 @@ stage('Testing') {
                 step([$class: 'CheckStylePublisher', canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'target/scalastyle-result.xml', unHealthy: ''])
             }
         }
-    }, reports: {
-        node {
-            unstash "poc"
-            withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
-                sh "sbt test"
-                sh "sbt it:test"
-                junit 'target/test-reports/*.xml'
-            }
-        }
-    }
+//    }, reports: {
+//        node {
+//            unstash "poc"
+//            withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
+//                sh "sbt test"
+//                sh "sbt it:test"
+//                junit 'target/test-reports/*.xml'
+//            }
+//        }
+//    }
+    },
     failFast: true
 }
 
