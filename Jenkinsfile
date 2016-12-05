@@ -9,7 +9,7 @@ stage('Checkout') {
 }
 
 stage("Build") {
-    node {
+    node("slave") {
         unstash "poc"
         withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
             sh "sbt clean compile"
@@ -18,12 +18,12 @@ stage("Build") {
 }
 
 stage("Deploy") {
-    node {
+    node("slave") {
         unstash "poc"
         withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
+            sh "sbt docker"
             // This step should not normally be used in your script. Consult the inline help for details.
             withDockerRegistry([credentialsId: '248b3cd6-9575-4bf5-aefe-12188ab9d2ba', url: 'https://koadr-on.azurecr.io']) {
-                sh "sbt docker"
                 dir('target/docker') {
                     // some block
                     def poc = docker.build "koadr-on.azurecr.io/poc:${env.BUILD_TAG}"
@@ -37,21 +37,21 @@ stage("Deploy") {
 
 stage('Testing') {
     parallel unitTesting: {
-        node {
+        node("slave") {
             unstash "poc"
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
                 sh "sbt test"
             }
         }
     }, integrationTesting: {
-        node("linux") {
+        node("slave") {
             unstash "poc"
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
                 sh "sbt it:test"
             }
         }
     }, stylecheck: {
-        node {
+        node("slave") {
             unstash "poc"
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
                 sh "sbt scalastyle"
@@ -59,7 +59,7 @@ stage('Testing') {
             }
         }
     }, reports: {
-        node {
+        node("slave") {
             unstash "poc"
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
                 sh "sbt coverage test"
@@ -69,6 +69,10 @@ stage('Testing') {
         }
     }
     failFast: true
+}
+
+stage("Performance") {
+
 }
 
 
