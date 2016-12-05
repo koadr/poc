@@ -44,9 +44,9 @@ stage('Testing') {
         node {
             unstash "poc"
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
-                sh "sbt coverage test"
-                sh "sbt coverage it:test"
-//                junit 'target/test-reports/*.xml'
+                sh "sbt test"
+                sh "sbt it:test"
+                junit 'target/test-reports/*.xml'
             }
         }
     }
