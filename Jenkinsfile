@@ -23,7 +23,6 @@ stage("Deploy") {
         withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
             // This step should not normally be used in your script. Consult the inline help for details.
             withDockerRegistry([credentialsId: '248b3cd6-9575-4bf5-aefe-12188ab9d2ba', url: 'https://koadr-on.azurecr.io']) {
-                sh "mkdir target/docker"
                 sh "sbt docker"
                 dir('target/docker') {
                     // some block
@@ -63,8 +62,8 @@ stage('Testing') {
         node {
             unstash "poc"
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
-                sh "sbt test"
-                sh "sbt it:test"
+                sh "sbt coverage test"
+                sh "sbt coverage it:test"
                 junit 'target/test-reports/*.xml'
             }
         }
