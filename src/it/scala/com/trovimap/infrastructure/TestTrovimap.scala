@@ -6,18 +6,22 @@ import com.opentable.db.postgres.embedded.EmbeddedPostgres
 import com.sksamuel.elastic4s.IndexAndType
 import com.trovimap.api.PropertyApi
 import com.trovimap.infrastructure.http.rest.PropertyService
-import com.trovimap.infrastructure.slick.{
-  SlickExecutionContext,
-  SlickPropertyRepository
-}
+import com.trovimap.infrastructure.slick.{SlickExecutionContext, SlickPropertyRepository}
 import com.typesafe.config.ConfigFactory
 import org.flywaydb.core.Flyway
 import _root_.slick.jdbc.JdbcBackend.Database
 import com.sksamuel.elastic4s.testkit.ElasticSugar
+import org.scalatest.concurrent.ScalaFutures
+import org.scalatest.time.{Millis, Span}
 
 import scala.concurrent.ExecutionContext
 
-trait TestTrovimap extends ElasticSugar {
+trait TestTrovimap extends ElasticSugar with ScalaFutures {
+  val timeout = 3500
+  val interval = 15
+  implicit val patience = PatienceConfig(timeout = scaled(Span(timeout, Millis)), interval = scaled(Span(interval, Millis)))
+
+
   val port =
     ConfigFactory.load("application.it.conf").getInt("services.postgres.port")
   private val dbBuilder = EmbeddedPostgres.builder().setPort(0)

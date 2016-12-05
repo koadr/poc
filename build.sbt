@@ -6,9 +6,14 @@ scalaVersion := "2.11.8"
 
 lazy val integrationTest = IntegrationTest.extend(Test)
 
+lazy val dockerSettings =
+    DockerSettings.dockerDepSettings ++ DockerSettings.dockerFileSettings ++ DockerSettings.dockerImageSettings
+
+
 lazy val trovimapPOC = (project in file(".")).
   configs(integrationTest).
-  enablePlugins(BuildInfoPlugin).
+  enablePlugins(BuildInfoPlugin, DockerPlugin).
+  settings(dockerSettings:_*).
   settings(
     buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion),
     buildInfoPackage := "com.trovimap"
@@ -21,7 +26,7 @@ lazy val trovimapPOC = (project in file(".")).
     val loggingVersion = "1.1.7"
     Seq(
       "ch.qos.logback" % "logback-classic" % loggingVersion,
-      "org.slf4j" % "slf4j-simple" % "1.7.21",
+      "ch.qos.logback" % "logback-core" % loggingVersion,
       "org.slf4j" % "slf4j-api" % "1.7.21",
       "com.typesafe.akka" %% "akka-http" % akkaHttpV,
       "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpV % "it,test",
@@ -40,9 +45,19 @@ lazy val trovimapPOC = (project in file(".")).
       "com.opentable.components" % "otj-pg-embedded" % "0.7.1" % "it,test"
     )
   }).settings(ScalastylePlugin.projectSettings).
-  settings(coverageEnabled := true).
+  settings(
+    assemblyMergeStrategy in assembly := {
+      case PathList(ps @ _*) if ps.last endsWith "BaseDateTime.class" => MergeStrategy.filterDistinctLines
+      case x =>
+        val oldStrategy = (assemblyMergeStrategy in assembly).value
+        oldStrategy(x)
+    }
+  ).
+  settings(coverageEnabled.in(Test, test) := true).
+  settings(mainClass := Some("com.trovimap.infrastructure.http.Trovimap")).
   settings(
     name := "trovimap-poc",
     version := "1.0",
     scalaVersion := "2.11.8"
   )
+

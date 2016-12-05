@@ -28,9 +28,9 @@ class PropertyQueryServiceSpec
 
   "PropertyQueryService" should {
     "query based on a single attribute" in new TestTrovimap with TestHelpers {
-      val propertya =
+      val propertya: PropertyData =
         propertyData(arbProperty.copy(numberOfBathrooms = 3)).copy(id = "a")
-      val propertyb =
+      val propertyb: PropertyData =
         propertyData(arbProperty.copy(numberOfBathrooms = 3)).copy(id = "b")
 
       client execute {
@@ -49,10 +49,10 @@ class PropertyQueryServiceSpec
     }
 
     "query based on multiple attributes" in new TestTrovimap with TestHelpers {
-      val propertya = propertyData(
+      val propertya: PropertyData = propertyData(
         arbProperty.copy(numberOfBathrooms = 3, numberOfBedrooms = 5))
         .copy(id = "a")
-      val propertyb = propertyData(
+      val propertyb: PropertyData = propertyData(
         arbProperty.copy(numberOfBathrooms = 3, numberOfBedrooms = 6))
         .copy(id = "b")
 

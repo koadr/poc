@@ -5,23 +5,13 @@ import akka.event.Logging
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
-import com.sksamuel.elastic4s.{
-  ElasticClient,
-  ElasticsearchClientUri,
-  IndexAndType
-}
+import com.sksamuel.elastic4s.{ElasticClient, ElasticsearchClientUri, IndexAndType}
 import com.trovimap.api.PropertyApi
-import com.trovimap.infrastructure.http.rest.{
-  PingService,
-  PropertyService,
-  VersionService
-}
-import com.trovimap.infrastructure.slick.{
-  SlickExecutionContext,
-  SlickPropertyRepository
-}
+import com.trovimap.infrastructure.http.rest.{PingService, PropertyService, VersionService}
+import com.trovimap.infrastructure.slick.{SlickExecutionContext, SlickPropertyRepository}
 import com.typesafe.config.ConfigFactory
 import com.trovimap.infrastructure.elasticsearch
+import com.trovimap.infrastructure.inmem.InMemoryPropertyRepository
 
 object Trovimap extends App {
   implicit val system = ActorSystem()
@@ -38,7 +28,7 @@ object Trovimap extends App {
   // Custom execution context for slick
   val slickEC = new SlickExecutionContext(
     system.dispatchers.lookup("db.dispatcher"))
-  val propertyRepo = new SlickPropertyRepository(db)(slickEC)
+  val propertyRepo = new InMemoryPropertyRepository()
 
   // Elasticsearch
   import org.elasticsearch.common.settings.Settings
