@@ -53,10 +53,6 @@ stage('Testing') {
     failFast: true
 }
 
-stage("Performance") {
-
-}
-
 stage("Deploy") {
     node {
         unstash "poc"
