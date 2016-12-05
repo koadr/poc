@@ -21,10 +21,9 @@ stage("Deploy") {
     node {
         unstash "poc"
         withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
-            sh "sbt docker"
-            sh 'ls -la'
             // This step should not normally be used in your script. Consult the inline help for details.
             withDockerRegistry([credentialsId: '248b3cd6-9575-4bf5-aefe-12188ab9d2ba', url: 'koadr-on.azurecr.io']) {
+                sh "sbt docker"
                 dir('target/docker') {
                     // some block
                     def poc = docker.build "koadr-on.azurecr.io/poc:${env.BUILD_TAG}"
