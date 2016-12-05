@@ -46,7 +46,7 @@ stage('Testing') {
             withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
                 sh "sbt coverage test"
                 sh "sbt coverage it:test"
-                junit 'target/test-reports/*.xml'
+//                junit 'target/test-reports/*.xml'
             }
         }
     }
