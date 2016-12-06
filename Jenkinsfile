@@ -20,7 +20,7 @@ stage("Build") {
 stage("Deploy") {
     node("slave") {
         unstash "poc"
-        withEnv(["PATH+SBT=${tool 'sbt'}/bin"]) {
+        withEnv(["PATH+SBT=${tool 'sbt'}/bin","PATH+DOCKER=${tool 'docker'}/bin"]) {
             sh "sbt docker"
             // This step should not normally be used in your script. Consult the inline help for details.
             withDockerRegistry([credentialsId: '248b3cd6-9575-4bf5-aefe-12188ab9d2ba', url: 'https://koadr-on.azurecr.io']) {
